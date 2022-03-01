@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { FC } from 'react';
 import classes from './Header.module.scss';
 
-const Header = () => (
+const Header: FC = () => (
   <div className={`${classes.Header} header`}>
     <div className="container">
       ToDo
