@@ -5,6 +5,7 @@ import './App.scss';
 import Header from './components/header/Header';
 import SignupPage from './pages/signup-page/SignupPage';
 import TodosPage from './pages/todos-page/TodosPage';
+import MainPage from './pages/main-page/MainPage';
 
 const App = () => {
 
@@ -19,6 +20,7 @@ const App = () => {
       <Header />
       <div className='container'>
         <Routes>
+          <Route path='/' element={<MainPage />} />
           <Route path='/mytodos' element={<TodosPage />} />
           <Route path='/signup' element={<SignupPage />} />
         </Routes>
