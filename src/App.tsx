@@ -3,9 +3,9 @@ import { Routes, Route } from 'react-router-dom';
 import { getDatabase, ref, set } from "firebase/database";
 import './App.scss';
 import Header from './components/header/Header';
-import SignupPage from './pages/signup-page/SignupPage';
 import TodosPage from './pages/todos-page/TodosPage';
 import MainPage from './pages/main-page/MainPage';
+import Signup from './components/auth/signup/Signup';
 
 const App = () => {
 
@@ -22,7 +22,7 @@ const App = () => {
         <Routes>
           <Route path='/' element={<MainPage />} />
           <Route path='/mytodos' element={<TodosPage />} />
-          <Route path='/signup' element={<SignupPage />} />
+          <Route path='/signup' element={<Signup />} />
         </Routes>
       </div>
 
