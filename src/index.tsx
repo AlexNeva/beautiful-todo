@@ -7,7 +7,7 @@ import 'antd/dist/antd.css';
 import './scss/index.scss';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB3nI8PACjmGw-QA9EnOxSnXkXfnSMlUto",
+  apiKey: process.env.REACT_APP_API_KEY,
   authDomain: "beautiful-todo.firebaseapp.com",
   databaseURL: "https://beautiful-todo-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "beautiful-todo",
