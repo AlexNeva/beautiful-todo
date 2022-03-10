@@ -5,15 +5,15 @@ import AuthService from '../../../API/authService';
 
 
 
-const Signup = () => {
+const Signin = () => {
 
   type MessagesType = { [property: string]: string };
 
   const messages: MessagesType = {
-    success: 'аккаунт успешно создан',
-    EMAIL_EXISTS: 'адрес электронной почты уже используется другим аккаунтом.',
-    OPERATION_NOT_ALLOWED: 'для этого проекта отключен вход с паролем.',
-    TOO_MANY_ATTEMPTS_TRY_LATER: 'мы заблокировали все запросы с этого устройства из-за необычной активности. Попробуйте позже.'
+    success: 'вы успешно вошли',
+    EMAIL_NOT_FOUND: 'нет записи пользователя, соответствующей этому идентификатору. Возможно, пользователь был удален.',
+    INVALID_PASSWORD: 'пароль недействителен или у пользователя нет пароля.',
+    USER_DISABLED: 'учетная запись пользователя отключена администратором.,'
   }
 
   const [user, setUser] = useState<AuthRequestType>({
@@ -23,9 +23,9 @@ const Signup = () => {
   })
 
 
-  const createAccount = () => {
+  const signin = () => {
     const authService = new AuthService();
-    authService.createAccount(user)
+    authService.login(user)
       .then(res => message.success(messages.success))
       .catch(err => {
         const key = err.error.message;
@@ -40,7 +40,7 @@ const Signup = () => {
       initialValues={{ remember: true }}
       layout='vertical'
       onValuesChange={(changedValues, allValues) => setUser({ ...user, ...changedValues })}
-      onFinish={createAccount}
+      onFinish={signin}
     >
       <Form.Item
         label="Email"
@@ -68,4 +68,4 @@ const Signup = () => {
   )
 };
 
-export default Signup;
+export default Signin;

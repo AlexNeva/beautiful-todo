@@ -5,15 +5,17 @@ export default interface ITodo {
   completed: boolean
 }
 
-export type SignupResponseType = {
+export type AuthResponseType = {
   idToken: string,
   email: string,
   refreshToken: string,
   expiresIn: string,
-  localId: string
+  localId: string,
+  displayName?: string,
+  registered?: boolean
 }
 
-export type SignupRequestType = {
+export type AuthRequestType = {
   email: string,
   password: string,
   readonly returnSecureToken: boolean
