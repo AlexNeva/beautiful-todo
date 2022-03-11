@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Form, Input, Button, Checkbox, message } from 'antd';
 import { AuthRequestType, AuthResponseType } from '../../../types/types';
 import AuthService from '../../../API/authService';
-
-
+import { AuthContext } from '../../context/AuthContext';
 
 const Signin = () => {
+
+  const { setAuth } = useContext(AuthContext);
 
   type MessagesType = { [property: string]: string };
 
@@ -26,13 +27,15 @@ const Signin = () => {
   const signin = () => {
     const authService = new AuthService();
     authService.login(user)
-      .then(res => message.success(messages.success))
+      .then(res => {
+        message.success(messages.success);
+        setAuth(true);
+      })
       .catch(err => {
         const key = err.error.message;
         message.error(messages[key]);
       })
   }
-
 
   return (
     <Form

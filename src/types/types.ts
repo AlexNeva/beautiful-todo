@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from "react";
 export default interface ITodo {
   userId: number,
   id: number,
@@ -19,4 +20,9 @@ export type AuthRequestType = {
   email: string,
   password: string,
   readonly returnSecureToken: boolean
+}
+
+export type AuthContextType = {
+  isAuth: boolean,
+  setAuth: Dispatch<SetStateAction<boolean>>
 }
