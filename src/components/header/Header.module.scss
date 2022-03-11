@@ -5,6 +5,19 @@
   box-shadow: var(--main-box-shadow);
 }
 
-.HeaderContainer {
+.HeaderNav {
+
+}
+
+.HeaderNavList {
   display: flex;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+.HeaderNavItem {
+  &:nth-last-child(2) {
+    margin-left: auto;
+    margin-right: 30px;
+  }
 }
