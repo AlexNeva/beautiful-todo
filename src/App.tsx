@@ -31,7 +31,11 @@ const App = () => {
         <Header />
         <div className='container'>
           <Routes>
-            <Route path='/' element={<MainPage />} />
+            <Route path='/' element={
+              <Private>
+                <MainPage />
+              </Private>
+            } />
             <Route path='/mytodos' element={
               <Private>
                 <TodosPage />

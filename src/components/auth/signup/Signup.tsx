@@ -41,6 +41,12 @@ const Signup = () => {
       layout='vertical'
       onValuesChange={(changedValues, allValues) => setUser({ ...user, ...changedValues })}
       onFinish={createAccount}
+      style={
+        {
+          maxWidth: '600px',
+          margin: '0 auto'
+        }
+      }
     >
       <Form.Item
         label="Email"
@@ -61,7 +67,7 @@ const Signup = () => {
       </Form.Item>
       <Form.Item>
         <Button type="primary" htmlType="submit">
-          Submit
+          Регистрация
         </Button>
       </Form.Item>
     </Form>

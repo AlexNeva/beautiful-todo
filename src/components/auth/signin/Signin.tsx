@@ -3,6 +3,7 @@ import { Form, Input, Button, Checkbox, message } from 'antd';
 import { AuthRequestType, AuthResponseType } from '../../../types/types';
 import AuthService from '../../../API/authService';
 import { AuthContext } from '../../context/AuthContext';
+import RedirectMessage from '../redirect-message/RedirectMessage';
 
 const Signin = () => {
 
@@ -44,6 +45,12 @@ const Signin = () => {
       layout='vertical'
       onValuesChange={(changedValues, allValues) => setUser({ ...user, ...changedValues })}
       onFinish={signin}
+      style={
+        {
+          maxWidth: '600px',
+          margin: '0 auto'
+        }
+      }
     >
       <Form.Item
         label="Email"
@@ -64,8 +71,11 @@ const Signin = () => {
       </Form.Item>
       <Form.Item>
         <Button type="primary" htmlType="submit">
-          Submit
+          Войти
         </Button>
+      </Form.Item>
+      <Form.Item>
+        <RedirectMessage />
       </Form.Item>
     </Form>
   )
