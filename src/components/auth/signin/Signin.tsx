@@ -1,10 +1,12 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import { Form, Input, Button, Checkbox, message } from 'antd';
 import { AuthRequestType, AuthResponseType } from '../../../types/types';
 import AuthService from '../../../API/authService';
 import { AuthContext } from '../../context/AuthContext';
 import RedirectMessage from '../redirect-message/RedirectMessage';
+import { routes } from '../../../routes/routes';
 
 const Signin = () => {
 
@@ -34,7 +36,11 @@ const Signin = () => {
       .then(res => {
         message.success(messages.success);
         setAuth(true);
-        navigate('/');
+        console.log(res.idToken);
+        Cookies.set('token', res.idToken);
+
+
+        navigate(routes.home.path);
       })
       .catch(err => {
         const key = err.error.message;

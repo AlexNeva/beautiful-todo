@@ -16,10 +16,22 @@ export type AuthResponseType = {
   registered?: boolean
 }
 
+
 export type AuthRequestType = {
   email: string,
   password: string,
   readonly returnSecureToken: boolean
+}
+
+export type CheckAuthRequestType = {
+  token: string | undefined,
+  returnSecureToken: boolean
+}
+
+export type CheckAuthResponseType = {
+  idToken: string,
+  refreshToken: string,
+  expiresIn: string
 }
 
 export type AuthContextType = {

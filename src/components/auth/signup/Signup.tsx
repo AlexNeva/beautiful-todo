@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Form, Input, Button, Checkbox, message } from 'antd';
 import { AuthRequestType, AuthResponseType } from '../../../types/types';
 import AuthService from '../../../API/authService';
+import { routes } from '../../../routes/routes';
 
 
 
@@ -31,7 +32,7 @@ const Signup = () => {
     authService.createAccount(user)
       .then(res => {
         message.success(messages.success);
-        navigate('/signin');
+        navigate(routes.signin.path);
       })
       .catch(err => {
         const key = err.error.message;

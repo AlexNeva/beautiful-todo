@@ -1,4 +1,4 @@
-import { AuthRequestType, AuthResponseType } from "../types/types";
+import { AuthRequestType, AuthResponseType, CheckAuthResponseType, CheckAuthRequestType } from "../types/types";
 
 export default class AuthService {
 
@@ -33,6 +33,10 @@ export default class AuthService {
 
   login(user: AuthRequestType): Promise<AuthResponseType> {
     return this.postResource(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${this.API_KEY}`, user);
+  }
+
+  checkAuth(data: CheckAuthRequestType): Promise<CheckAuthResponseType> {
+    return this.postResource(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=${this.API_KEY}`, data)
   }
 
 }
