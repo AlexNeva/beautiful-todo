@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Form, Input, Button, Checkbox, message } from 'antd';
 import { AuthRequestType, AuthResponseType } from '../../../types/types';
 import AuthService from '../../../API/authService';
@@ -6,6 +7,8 @@ import { AuthContext } from '../../context/AuthContext';
 import RedirectMessage from '../redirect-message/RedirectMessage';
 
 const Signin = () => {
+
+  const navigate = useNavigate();
 
   const { setAuth } = useContext(AuthContext);
 
@@ -31,6 +34,7 @@ const Signin = () => {
       .then(res => {
         message.success(messages.success);
         setAuth(true);
+        navigate('/');
       })
       .catch(err => {
         const key = err.error.message;

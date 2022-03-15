@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
+import { routes } from '../../../routes/routes';
 
 const RedirectMessage: FC = () => {
 
@@ -10,7 +11,7 @@ const RedirectMessage: FC = () => {
 
   return (
     <p>
-      Нет аккаунта? Пройдите <Link style={linkStyle} to={'/signup'}>регистрацию</Link>
+      Нет аккаунта? Пройдите <Link style={linkStyle} to={routes.signup.path}>регистрацию</Link>
     </p>
   )
 }

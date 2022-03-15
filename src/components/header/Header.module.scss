@@ -5,8 +5,14 @@
   box-shadow: var(--main-box-shadow);
 }
 
-.HeaderNav {
+.HeaderContainer {
+  display: flex;
+  justify-content: space-between;
 
+}
+
+.HeaderNav {
+  width: 100%;
 }
 
 .HeaderNavList {

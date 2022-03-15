@@ -9,6 +9,7 @@ import Signup from './components/auth/signup/Signup';
 import Signin from './components/auth/signin/Signin';
 import { AuthContext } from './components/context/AuthContext';
 import Private from './components/hoc/Private';
+import { routes } from './routes/routes';
 
 
 const App = () => {
@@ -17,12 +18,11 @@ const App = () => {
 
   useEffect(() => {
     const db = getDatabase();
-    console.log(db);
+    console.log(db.app.options.databaseURL);
 
   }, [])
 
   console.log(isAuth);
-
 
 
   return (
@@ -31,18 +31,18 @@ const App = () => {
         <Header />
         <div className='container'>
           <Routes>
-            <Route path='/' element={
+            <Route path={routes.home.path} element={
               <Private>
                 <MainPage />
               </Private>
             } />
-            <Route path='/mytodos' element={
+            <Route path={routes.mytodos.path} element={
               <Private>
                 <TodosPage />
               </Private>
             } />
-            <Route path='/signup' element={<Signup />} />
-            <Route path='/signin' element={<Signin />} />
+            <Route path={routes.signup.path} element={<Signup />} />
+            <Route path={routes.signin.path} element={<Signin />} />
           </Routes>
         </div>
 

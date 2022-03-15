@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Form, Input, Button, Checkbox, message } from 'antd';
 import { AuthRequestType, AuthResponseType } from '../../../types/types';
 import AuthService from '../../../API/authService';
@@ -8,6 +9,8 @@ import AuthService from '../../../API/authService';
 const Signup = () => {
 
   type MessagesType = { [property: string]: string };
+
+  const navigate = useNavigate();
 
   const messages: MessagesType = {
     success: 'аккаунт успешно создан',
@@ -26,7 +29,10 @@ const Signup = () => {
   const createAccount = () => {
     const authService = new AuthService();
     authService.createAccount(user)
-      .then(res => message.success(messages.success))
+      .then(res => {
+        message.success(messages.success);
+        navigate('/signin');
+      })
       .catch(err => {
         const key = err.error.message;
         message.error(messages[key]);
