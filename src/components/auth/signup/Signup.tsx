@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { Form, Input, Button, Checkbox, message } from 'antd';
 import { AuthRequestType, AuthResponseType } from '../../../types/types';
-import AuthService from '../../../API/authService';
 import { routes } from '../../../routes/routes';
 
 
@@ -28,8 +28,8 @@ const Signup = () => {
 
 
   const createAccount = () => {
-    const authService = new AuthService();
-    authService.createAccount(user)
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, user.email, user.password)
       .then(res => {
         message.success(messages.success);
         navigate(routes.signin.path);
@@ -39,7 +39,6 @@ const Signup = () => {
         message.error(messages[key]);
       })
   }
-
 
   return (
     <Form

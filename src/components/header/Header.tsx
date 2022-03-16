@@ -7,7 +7,7 @@ import classes from './Header.module.scss';
 
 const Header: FC = () => {
 
-  const { isAuth } = useContext(AuthContext);
+  const { isAuth } = useContext(AuthContext).userAuth;
 
   return (
     <div className={`${classes.Header} header`}>

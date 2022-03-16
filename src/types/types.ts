@@ -34,7 +34,12 @@ export type CheckAuthResponseType = {
   expiresIn: string
 }
 
-export type AuthContextType = {
+export type UserAuthType = {
   isAuth: boolean,
-  setAuth: Dispatch<SetStateAction<boolean>>
+  isPending: boolean
+}
+
+export type AuthContextType = {
+  userAuth: UserAuthType,
+  setAuth: Dispatch<SetStateAction<UserAuthType>>
 }

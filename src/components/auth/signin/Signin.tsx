@@ -1,9 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { Form, Input, Button, Checkbox, message } from 'antd';
 import { AuthRequestType, AuthResponseType } from '../../../types/types';
-import AuthService from '../../../API/authService';
 import { AuthContext } from '../../context/AuthContext';
 import RedirectMessage from '../redirect-message/RedirectMessage';
 import { routes } from '../../../routes/routes';
@@ -31,15 +30,10 @@ const Signin = () => {
 
 
   const signin = () => {
-    const authService = new AuthService();
-    authService.login(user)
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, user.email, user.password)
       .then(res => {
         message.success(messages.success);
-        setAuth(true);
-        console.log(res.idToken);
-        Cookies.set('token', res.idToken);
-
-
         navigate(routes.home.path);
       })
       .catch(err => {
