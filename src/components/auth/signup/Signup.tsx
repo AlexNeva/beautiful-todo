@@ -15,7 +15,7 @@ const Signup = () => {
 
   const messages: MessagesType = {
     success: 'аккаунт успешно создан',
-    EMAIL_EXISTS: 'адрес электронной почты уже используется другим аккаунтом.',
+    'Firebase: Error (auth/email-already-in-use).': 'адрес электронной почты уже используется другим аккаунтом.',
     OPERATION_NOT_ALLOWED: 'для этого проекта отключен вход с паролем.',
     TOO_MANY_ATTEMPTS_TRY_LATER: 'мы заблокировали все запросы с этого устройства из-за необычной активности. Попробуйте позже.'
   }
@@ -35,7 +35,7 @@ const Signup = () => {
         navigate(routes.signin.path);
       })
       .catch(err => {
-        const key = err.error.message;
+        const key = err.message;
         message.error(messages[key]);
       })
   }

@@ -16,8 +16,6 @@ import { UserAuthType } from './types/types';
 
 const App = () => {
 
-
-
   const [userAuth, setAuth] = useState<UserAuthType>({
     isAuth: false,
     isPending: true,

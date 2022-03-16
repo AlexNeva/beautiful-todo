@@ -17,8 +17,8 @@ const Signin = () => {
 
   const messages: MessagesType = {
     success: 'вы успешно вошли',
-    EMAIL_NOT_FOUND: 'нет записи пользователя, соответствующей этому идентификатору. Возможно, пользователь был удален.',
-    INVALID_PASSWORD: 'пароль недействителен или у пользователя нет пароля.',
+    'Firebase: Error (auth/user-not-found).': 'нет записи пользователя, соответствующей этому идентификатору. Возможно, пользователь был удален.',
+    'Firebase: Error (auth/wrong-password).': 'пароль недействителен или у пользователя нет пароля.',
     USER_DISABLED: 'учетная запись пользователя отключена администратором.,'
   }
 
@@ -37,7 +37,7 @@ const Signin = () => {
         navigate(routes.home.path);
       })
       .catch(err => {
-        const key = err.error.message;
+        const key = err.message;
         message.error(messages[key]);
       })
   }
