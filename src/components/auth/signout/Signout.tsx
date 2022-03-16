@@ -13,17 +13,16 @@ const Signout: FC = () => {
 
 
   const messages: MessagesType = {
-    error: 'Возникла ошибка. Попробуйте снова'
+    error: 'Возникла ошибка. Попробуйте снова',
+    success: 'Вы успешно вышли из личного кабинета',
   }
-
-
 
   const { setAuth } = useContext(AuthContext);
 
   const signout = () => {
     const auth = getAuth();
     signOut(auth).then(() => {
-      // navigate(routes.signin.path);
+      message.success(messages.success);
     }).catch(() => {
       message.error(messages.error);
     });
