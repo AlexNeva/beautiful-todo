@@ -1,14 +1,14 @@
 import React, { FC } from 'react';
 import classes from './TodoItem.module.scss';
-import ITodo from '../../types/types';
+import ITodo, { TodoType } from '../../types/types';
 
-const TodoItem: FC<ITodo> = ({ userId, id, title, completed }) => (
+const TodoItem: FC<TodoType> = ({ todoId, descr, completed, idx }) => (
   <li className={classes.TodoItem}>
     <div className={classes.TodoNum}>
-      {id}.
+      {idx + 1}.
     </div>
     <div className={classes.TodoTitle}>
-      {title}
+      {descr}
     </div>
     <button className={classes.TodoBtn} type='button'>
       <span></span><span></span><span></span>

@@ -1,13 +1,12 @@
 import React from 'react';
-import Message from '../../components/message/Message';
+
+import AddTodoForm from '../../components/todo-list/add-todo/AddTodoForm';
 import TodoList from '../../components/todo-list/TodoList';
 
 const TodosPage = () => {
   return (
     <div>
-      <Message>
-        ToDo list is empty...
-      </Message>
+      <AddTodoForm />
       <TodoList />
     </div>
   )

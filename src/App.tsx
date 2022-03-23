@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Spin } from 'antd';
-import { getDatabase, ref, set } from "firebase/database";
+import { getDatabase, ref, set, onValue } from "firebase/database";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import './App.scss';
 import Header from './components/header/Header';
@@ -38,8 +38,6 @@ const App = () => {
   }
 
   useEffect(() => {
-    const db = getDatabase();
-    console.log(db.app.options.databaseURL);
     checkUserAuth();
   }, [])
 
@@ -55,7 +53,6 @@ const App = () => {
         transform: 'translate(-50%, -50%)'
       }} />
   }
-
 
   return (
     <AuthContext.Provider value={{ userAuth, setAuth }}>

@@ -6,6 +6,14 @@ export default interface ITodo {
   completed: boolean
 }
 
+export type TodoType = {
+  todoId: number | null,
+  createdAt?: number | null,
+  completed: false,
+  descr: string,
+  idx: number,
+}
+
 export type AuthResponseType = {
   idToken: string,
   email: string,
