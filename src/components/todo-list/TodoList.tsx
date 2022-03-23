@@ -4,16 +4,20 @@ import { TodoType } from '../../types/types';
 import TodoItem from './TodoItem';
 import classes from './TodoList.module.scss';
 import Message from '../message/Message';
+import { getAuth } from 'firebase/auth';
 
 
 const TodoList: FC = () => {
 
   const [todos, setTodos] = useState<TodoType[]>([]);
 
+  const auth = getAuth();
+  const userId = auth.currentUser?.uid;
+
   const getTodos = (): void => {
     const db = getDatabase();
 
-    const todosRef = ref(db, `users/Glu8kWG6pXVMisx1D65EPtsMWc42/todos`);
+    const todosRef = ref(db, `users/${userId}/todos`);
 
     onChildAdded(todosRef, (data) => {
       setTodos((prev) => [...prev, data.val()])
