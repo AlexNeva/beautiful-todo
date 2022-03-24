@@ -9,7 +9,7 @@ const AddTodoForm = () => {
   const form = Form.useForm();
 
   const [todo, setTodo] = useState<TodoType>({
-    todoId: null,
+    todoId: '',
     createdAt: null,
     completed: false,
     descr: '',
@@ -25,7 +25,8 @@ const AddTodoForm = () => {
     const newTodoRef = push(todoRef);
 
     set(newTodoRef, {
-      ...todo
+      ...todo,
+      todoId: newTodoRef.key,
     });
 
     form[0].resetFields();
@@ -41,7 +42,6 @@ const AddTodoForm = () => {
       onValuesChange={(changedValues) => setTodo({
         ...todo,
         ...changedValues,
-        todoId: Date.now(),
         createdAt: Date.now(),
       })}
 

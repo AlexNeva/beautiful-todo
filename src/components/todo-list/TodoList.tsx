@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { getDatabase, ref, onValue, onChildAdded } from "firebase/database";
+import { getDatabase, ref, onValue, onChildAdded, onChildRemoved } from "firebase/database";
 import { TodoType } from '../../types/types';
 import TodoItem from './TodoItem';
 import classes from './TodoList.module.scss';
@@ -21,6 +21,11 @@ const TodoList: FC = () => {
 
     onChildAdded(todosRef, (data) => {
       setTodos((prev) => [...prev, data.val()])
+    });
+    onChildRemoved(todosRef, (data) => {
+      setTodos((prev) => (
+        prev.filter((todo) => todo.todoId !== data.key)
+      ))
     });
   }
 
