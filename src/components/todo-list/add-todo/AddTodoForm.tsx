@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { getAuth } from "firebase/auth";
 import { getDatabase, ref, set, push } from "firebase/database";
 import { Form, Input, Button } from 'antd';
 import { TodoType } from '../../../types/types';
 
-const AddTodoForm = () => {
+const AddTodoForm: FC = () => {
 
   const form = Form.useForm();
 
@@ -13,7 +13,6 @@ const AddTodoForm = () => {
     createdAt: null,
     completed: false,
     descr: '',
-    idx: 0,
   })
 
   const addTodoItem = (): void => {

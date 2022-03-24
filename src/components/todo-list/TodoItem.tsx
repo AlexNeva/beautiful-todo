@@ -1,25 +1,24 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { getAuth } from "firebase/auth";
 import { getDatabase, ref, remove } from 'firebase/database';
 import classes from './TodoItem.module.scss';
-import ITodo, { TodoType } from '../../types/types';
+import { TodoType } from '../../types/types';
 import { Menu, Dropdown } from 'antd';
-
-
-
+import EditTodo from './edit-todo/EditTodo';
 
 const TodoItem: FC<TodoType> = ({ todoId, descr, completed, idx }) => {
 
+  const [edit, setEdit] = useState<boolean>(false);
 
   const removeTodoItem = (id: string,): void => {
     const auth = getAuth();
     const userId = auth.currentUser?.uid;
     const db = getDatabase();
     remove(ref(db, `users/${userId}/todos/${id}`))
-      .then((response) => {
-        console.log('ok');
+  }
 
-      })
+  const editTodoItem = (): void => {
+    setEdit(true);
   }
 
 
@@ -38,6 +37,7 @@ const TodoItem: FC<TodoType> = ({ todoId, descr, completed, idx }) => {
         <button
           className={classes.TodoActionBtn}
           type='button'
+          onClick={editTodoItem}
         >
           редактировать
         </button>
@@ -56,10 +56,22 @@ const TodoItem: FC<TodoType> = ({ todoId, descr, completed, idx }) => {
   return (
     <li className={classes.TodoItem}>
       <div className={classes.TodoNum}>
-        {idx + 1}.
+        {
+          typeof (idx) !== 'undefined' ? idx + 1 : null
+        }.
       </div>
       <div className={classes.TodoTitle}>
-        {descr}
+        {
+          !edit
+            ?
+            descr
+            :
+            <EditTodo
+              descr={descr}
+              id={todoId}
+              edit={setEdit}
+            />
+        }
       </div>
       <Dropdown overlay={menu} placement="bottomRight">
         <button className={classes.TodoBtn} type='button'>

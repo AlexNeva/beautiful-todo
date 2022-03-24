@@ -11,7 +11,7 @@ export type TodoType = {
   createdAt?: number | null,
   completed: false,
   descr: string,
-  idx: number,
+  idx?: number,
 }
 
 export type AuthResponseType = {
@@ -50,4 +50,10 @@ export type UserAuthType = {
 export type AuthContextType = {
   userAuth: UserAuthType,
   setAuth: Dispatch<SetStateAction<UserAuthType>>
+}
+
+export type EditTodoType = {
+  descr: string,
+  id: string,
+  edit: Dispatch<SetStateAction<boolean>>
 }

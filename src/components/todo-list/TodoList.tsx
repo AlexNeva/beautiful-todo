@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { getDatabase, ref, onValue, onChildAdded, onChildRemoved } from "firebase/database";
+import { getDatabase, ref, onChildAdded, onChildRemoved, onChildChanged } from "firebase/database";
 import { TodoType } from '../../types/types';
 import TodoItem from './TodoItem';
 import classes from './TodoList.module.scss';
@@ -26,6 +26,9 @@ const TodoList: FC = () => {
       setTodos((prev) => (
         prev.filter((todo) => todo.todoId !== data.key)
       ))
+    });
+    onChildChanged(todosRef, (data) => {
+      setTodos((prev) => prev.map((item) => item.todoId === data.key ? { ...item, descr: data.val().descr } : item).reverse())
     });
   }
 
