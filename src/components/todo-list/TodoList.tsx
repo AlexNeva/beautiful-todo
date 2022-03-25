@@ -24,11 +24,11 @@ const TodoList: FC = () => {
     });
     onChildRemoved(todosRef, (data) => {
       setTodos((prev) => (
-        prev.filter((todo) => todo.todoId !== data.key)
+        prev.filter((todo) => todo.todoId !== data.key).reverse()
       ))
     });
     onChildChanged(todosRef, (data) => {
-      setTodos((prev) => prev.map((item) => item.todoId === data.key ? { ...item, descr: data.val().descr } : item).reverse())
+      setTodos((prev) => prev.map((item) => item.todoId === data.key ? { ...data.val() } : item).reverse())
     });
   }
 

@@ -1,19 +1,28 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { getAuth } from "firebase/auth";
-import { getDatabase, ref, remove } from 'firebase/database';
+import { getDatabase, ref, remove, update, onValue } from 'firebase/database';
 import classes from './TodoItem.module.scss';
 import { TodoType } from '../../types/types';
 import { Menu, Dropdown } from 'antd';
 import EditTodo from './edit-todo/EditTodo';
 
-const TodoItem: FC<TodoType> = ({ todoId, descr, completed, idx }) => {
+const TodoItem: FC<TodoType> = ({ todoId, descr, idx }) => {
+
+  const auth = getAuth();
+  const userId = auth.currentUser?.uid;
+  const db = getDatabase();
 
   const [edit, setEdit] = useState<boolean>(false);
 
-  const removeTodoItem = (id: string,): void => {
-    const auth = getAuth();
-    const userId = auth.currentUser?.uid;
-    const db = getDatabase();
+  const [todo, setTodo] = useState<TodoType>();
+
+  const todoStyle = () => (
+    {
+      backgroundColor: todo?.completed ? 'rgba(0,0,0,0.3)' : '#FFFFFF'
+    }
+  )
+
+  const removeTodoItem = (id: string): void => {
     remove(ref(db, `users/${userId}/todos/${id}`))
   }
 
@@ -21,6 +30,15 @@ const TodoItem: FC<TodoType> = ({ todoId, descr, completed, idx }) => {
     setEdit(true);
   }
 
+  const completeTodoItem = (): void => {
+    update(ref(db, `users/${userId}/todos/${todoId}`), { ...todo, completed: !todo?.completed })
+  }
+
+  useEffect(() => {
+    onValue(ref(db, `users/${userId}/todos/${todoId}`), (snapshot) => {
+      setTodo(snapshot.val())
+    });
+  }, [])
 
   const menu = (
     <Menu>
@@ -46,6 +64,7 @@ const TodoItem: FC<TodoType> = ({ todoId, descr, completed, idx }) => {
         <button
           className={classes.TodoActionBtn}
           type='button'
+          onClick={completeTodoItem}
         >
           выполнено
         </button>
@@ -53,8 +72,12 @@ const TodoItem: FC<TodoType> = ({ todoId, descr, completed, idx }) => {
     </Menu>
   );
 
+
   return (
-    <li className={classes.TodoItem}>
+    <li
+      className={classes.TodoItem}
+      style={todoStyle()}
+    >
       <div className={classes.TodoNum}>
         {
           typeof (idx) !== 'undefined' ? idx + 1 : null
