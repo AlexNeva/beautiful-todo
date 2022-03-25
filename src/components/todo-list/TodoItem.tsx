@@ -18,7 +18,13 @@ const TodoItem: FC<TodoType> = ({ todoId, descr, idx }) => {
 
   const todoStyle = () => (
     {
-      backgroundColor: todo?.completed ? 'rgba(0,0,0,0.3)' : '#FFFFFF'
+      backgroundColor: todo?.completed ? 'rgba(0,0,0,0.1)' : '#FFFFFF'
+    }
+  )
+
+  const titleStyle = () => (
+    {
+      textDecoration: todo?.completed ? 'line-through' : 'none'
     }
   )
 
@@ -83,7 +89,10 @@ const TodoItem: FC<TodoType> = ({ todoId, descr, idx }) => {
           typeof (idx) !== 'undefined' ? idx + 1 : null
         }.
       </div>
-      <div className={classes.TodoTitle}>
+      <div
+        className={classes.TodoTitle}
+        style={titleStyle()}
+      >
         {
           !edit
             ?

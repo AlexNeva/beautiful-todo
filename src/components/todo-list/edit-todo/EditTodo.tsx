@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import { getAuth } from "firebase/auth";
 import { getDatabase, ref, update, onValue } from 'firebase/database';
 import { EditTodoType, TodoType } from '../../../types/types';
@@ -8,6 +8,12 @@ const EditTodo: FC<EditTodoType> = ({ descr, id, edit }) => {
   const [value, setValue] = useState<string>(descr);
 
   const [todo, setTodo] = useState<TodoType>();
+
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const focusInput = (): void => {
+    inputRef.current?.focus();
+  }
 
   const changeHandler = (evt: React.ChangeEvent<HTMLInputElement>): void => {
     setValue(evt.target.value);
@@ -29,12 +35,14 @@ const EditTodo: FC<EditTodoType> = ({ descr, id, edit }) => {
 
   }
 
-  console.log(todo);
-
+  useEffect(() => {
+    focusInput();
+  }, [edit])
 
   return (
     <form onSubmit={submitHandler}>
       <input
+        ref={inputRef}
         type="text" value={value}
         onChange={changeHandler}
         onBlur={submitHandler}
