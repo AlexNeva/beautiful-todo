@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import { getAuth } from "firebase/auth";
-import { getDatabase, ref, remove, update, onValue } from 'firebase/database';
+import { getDatabase, ref, remove, update, onValue, off } from 'firebase/database';
 import classes from './TodoItem.module.scss';
 import { TodoType } from '../../types/types';
 import { Menu, Dropdown } from 'antd';
@@ -44,6 +44,10 @@ const TodoItem: FC<TodoType> = ({ todoId, descr, idx }) => {
     onValue(ref(db, `users/${userId}/todos/${todoId}`), (snapshot) => {
       setTodo(snapshot.val())
     });
+
+    return () => {
+      off(ref(db, `users/${userId}/todos/${todoId}`));
+    }
   }, [])
 
   const menu = (
