@@ -2,6 +2,7 @@ import React, { FC, useEffect, useRef, useState } from 'react';
 import { getAuth } from "firebase/auth";
 import { getDatabase, ref, update, onValue } from 'firebase/database';
 import { EditTodoType, TodoType } from '../../../types/types';
+import classes from './EditTodo.module.scss';
 
 const EditTodo: FC<EditTodoType> = ({ descr, id, edit }) => {
 
@@ -40,8 +41,12 @@ const EditTodo: FC<EditTodoType> = ({ descr, id, edit }) => {
   }, [edit])
 
   return (
-    <form onSubmit={submitHandler}>
+    <form
+      className={classes.EditForm}
+      onSubmit={submitHandler}
+    >
       <input
+        className={classes.EditInput}
         ref={inputRef}
         type="text" value={value}
         onChange={changeHandler}
