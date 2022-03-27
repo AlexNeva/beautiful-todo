@@ -3,6 +3,7 @@ import { getAuth } from "firebase/auth";
 import { getDatabase, ref, set, push } from "firebase/database";
 import { Form, Input, Button } from 'antd';
 import { TodoType } from '../../../types/types';
+import moment from 'moment';
 
 const AddTodoForm: FC = () => {
 
@@ -41,7 +42,7 @@ const AddTodoForm: FC = () => {
       onValuesChange={(changedValues) => setTodo({
         ...todo,
         ...changedValues,
-        createdAt: Date.now(),
+        createdAt: moment().format(),
       })}
 
     >

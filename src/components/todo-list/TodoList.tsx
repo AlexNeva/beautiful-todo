@@ -55,7 +55,10 @@ const TodoList: FC = () => {
                   todoId={todo.todoId}
                   idx={idx}
                   completed={todo.completed}
-                  descr={todo.descr} />
+                  descr={todo.descr}
+                  createdAt={todo.createdAt}
+                />
+
               ))
             }
           </ul>

@@ -1,12 +1,13 @@
 import React, { FC, useEffect, useState } from 'react';
 import { getAuth } from "firebase/auth";
 import { getDatabase, ref, remove, update, onValue, off } from 'firebase/database';
-import classes from './TodoItem.module.scss';
 import { TodoType } from '../../types/types';
+import moment from 'moment';
 import { Menu, Dropdown } from 'antd';
 import EditTodo from './edit-todo/EditTodo';
+import classes from './TodoItem.module.scss';
 
-const TodoItem: FC<TodoType> = ({ todoId, descr, idx }) => {
+const TodoItem: FC<TodoType> = ({ todoId, descr, idx, createdAt }) => {
 
   const auth = getAuth();
   const userId = auth.currentUser?.uid;
@@ -21,6 +22,14 @@ const TodoItem: FC<TodoType> = ({ todoId, descr, idx }) => {
       backgroundColor: todo?.completed ? 'rgba(0,0,0,0.1)' : '#FFFFFF'
     }
   )
+
+  const time = (timestamp: string | null | undefined) => {
+    if (timestamp) {
+      return moment(timestamp).format('D.M.yy HH:mm')
+    }
+
+    return 'время неизвестно'
+  }
 
   const titleStyle = () => (
     {
@@ -82,7 +91,6 @@ const TodoItem: FC<TodoType> = ({ todoId, descr, idx }) => {
     </Menu>
   );
 
-
   return (
     <li
       className={classes.TodoItem}
@@ -114,7 +122,9 @@ const TodoItem: FC<TodoType> = ({ todoId, descr, idx }) => {
           <span></span><span></span><span></span>
         </button>
       </Dropdown>
-
+      <div className={classes.TodoTime}>
+        {time(createdAt)}
+      </div>
     </li>
   )
 

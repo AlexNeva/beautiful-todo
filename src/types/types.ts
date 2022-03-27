@@ -8,7 +8,7 @@ export default interface ITodo {
 
 export type TodoType = {
   todoId: string,
-  createdAt?: number | null,
+  createdAt?: string | null,
   completed: false,
   descr: string,
   idx?: number,
