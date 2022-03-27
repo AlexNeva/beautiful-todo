@@ -58,7 +58,7 @@ const App = () => {
     <AuthContext.Provider value={{ userAuth, setAuth }}>
       <div className="App">
         <Header />
-        <div className='container'>
+        <div className='main-container container'>
           <Routes>
             <Route path={routes.home.path} element={
               <Private>

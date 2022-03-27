@@ -1,0 +1,32 @@
+.MainPage {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1 1 auto;
+  background: url('../../../public/assets/img/10827.jpg') 50% 50% / contain no-repeat;
+}
+
+.Link {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 75px;
+}
+
+.Link a {
+  margin-top: 30px;
+  color: #fff;
+  border-color: #1890ff;
+  background: #1890ff;
+  text-shadow: 0 -1px 0 rgb(0 0 0 / 12%);
+  box-shadow: 0 2px 0 rgb(0 0 0 / 5%);
+  border-radius: 2px;
+  padding: 1em 2em;
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.1);
+
+  &:hover {
+    color: #fff;
+    border-color: #40a9ff;
+    background: #40a9ff;
+  }
+}
