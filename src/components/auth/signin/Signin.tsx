@@ -49,8 +49,10 @@ const Signin = () => {
       layout='vertical'
       onValuesChange={(changedValues, allValues) => setUser({ ...user, ...changedValues })}
       onFinish={signin}
+      validateTrigger='onBlur'
       style={
         {
+          width: '100%',
           maxWidth: '600px',
           margin: '0 auto'
         }
@@ -59,14 +61,20 @@ const Signin = () => {
       <Form.Item
         label="Email"
         name="email"
-        rules={[{ required: true, message: 'Введите email' }]}
+        rules={[
+          { required: true, message: 'Введите email' },
+          { type: 'email', message: 'Введите корректный email' }
+        ]}
       >
         <Input />
       </Form.Item>
       <Form.Item
         label="Пароль"
         name="password"
-        rules={[{ required: true, message: 'Введите пароль' }]}
+        rules={[
+          { required: true, message: 'Введите пароль' },
+          { min: 6, max: 12, message: 'Пароль должен содержать не менее 6 и не более 12 символов' }
+        ]}
       >
         <Input.Password />
       </Form.Item>
