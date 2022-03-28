@@ -36,15 +36,12 @@ const TodoList: FC = () => {
     getTodos();
   }, [])
 
-  console.log(todos);
-
-
   return (
     <>
       {
         !todos.length ?
           <Message>
-            ToDo list is empty...
+            Cписок дел пуст...
           </Message>
           :
           <ul className={`${classes.TodoList} todo-list`}>

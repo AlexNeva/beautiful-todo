@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { Form, Input, Button, Checkbox, message } from 'antd';
@@ -10,8 +10,6 @@ import { routes } from '../../../routes/routes';
 const Signin = () => {
 
   const navigate = useNavigate();
-
-  const { setAuth } = useContext(AuthContext);
 
   type MessagesType = { [property: string]: string };
 

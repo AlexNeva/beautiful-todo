@@ -6,7 +6,6 @@ const Signout: FC = () => {
 
   type MessagesType = { [property: string]: string };
 
-
   const messages: MessagesType = {
     error: 'Возникла ошибка. Попробуйте снова',
     success: 'Вы успешно вышли из личного кабинета',

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Spin } from 'antd';
-import { getDatabase, ref, set, onValue } from "firebase/database";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import './App.scss';
 import Header from './components/header/Header';
@@ -27,10 +26,10 @@ const App = () => {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log('залогинен');
+
         setAuth({ isAuth: true, isPending: false })
       } else {
-        console.log('не залогинен');
+
         setAuth({ isAuth: false, isPending: false })
       }
 
@@ -40,8 +39,6 @@ const App = () => {
   useEffect(() => {
     checkUserAuth();
   }, [])
-
-  console.log(isAuth, isPending);
 
   if (isPending) {
     return <Spin
