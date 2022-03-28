@@ -20,7 +20,7 @@ const TodoList: FC = () => {
     const todosRef = ref(db, `users/${userId}/todos`);
 
     onChildAdded(todosRef, (data) => {
-      setTodos((prev) => [...prev, data.val()])
+      setTodos((prev) => [...prev.reverse(), data.val()])
     });
     onChildRemoved(todosRef, (data) => {
       setTodos((prev) => (
