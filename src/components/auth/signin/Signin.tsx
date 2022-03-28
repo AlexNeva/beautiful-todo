@@ -1,9 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { Form, Input, Button, Checkbox, message } from 'antd';
 import { AuthRequestType, AuthResponseType } from '../../../types/types';
-import AuthService from '../../../API/authService';
 import { AuthContext } from '../../context/AuthContext';
 import RedirectMessage from '../redirect-message/RedirectMessage';
 import { routes } from '../../../routes/routes';
@@ -12,14 +11,12 @@ const Signin = () => {
 
   const navigate = useNavigate();
 
-  const { setAuth } = useContext(AuthContext);
-
   type MessagesType = { [property: string]: string };
 
   const messages: MessagesType = {
     success: 'вы успешно вошли',
-    EMAIL_NOT_FOUND: 'нет записи пользователя, соответствующей этому идентификатору. Возможно, пользователь был удален.',
-    INVALID_PASSWORD: 'пароль недействителен или у пользователя нет пароля.',
+    'Firebase: Error (auth/user-not-found).': 'нет записи пользователя, соответствующей этому идентификатору. Возможно, пользователь был удален.',
+    'Firebase: Error (auth/wrong-password).': 'пароль недействителен или у пользователя нет пароля.',
     USER_DISABLED: 'учетная запись пользователя отключена администратором.,'
   }
 
@@ -31,19 +28,14 @@ const Signin = () => {
 
 
   const signin = () => {
-    const authService = new AuthService();
-    authService.login(user)
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, user.email, user.password)
       .then(res => {
         message.success(messages.success);
-        setAuth(true);
-        console.log(res.idToken);
-        Cookies.set('token', res.idToken);
-
-
         navigate(routes.home.path);
       })
       .catch(err => {
-        const key = err.error.message;
+        const key = err.message;
         message.error(messages[key]);
       })
   }
@@ -55,8 +47,10 @@ const Signin = () => {
       layout='vertical'
       onValuesChange={(changedValues, allValues) => setUser({ ...user, ...changedValues })}
       onFinish={signin}
+      validateTrigger='onBlur'
       style={
         {
+          width: '100%',
           maxWidth: '600px',
           margin: '0 auto'
         }
@@ -65,14 +59,20 @@ const Signin = () => {
       <Form.Item
         label="Email"
         name="email"
-        rules={[{ required: true, message: 'Введите email' }]}
+        rules={[
+          { required: true, message: 'Введите email' },
+          { type: 'email', message: 'Введите корректный email' }
+        ]}
       >
         <Input />
       </Form.Item>
       <Form.Item
         label="Пароль"
         name="password"
-        rules={[{ required: true, message: 'Введите пароль' }]}
+        rules={[
+          { required: true, message: 'Введите пароль' },
+          { min: 6, max: 12, message: 'Пароль должен содержать не менее 6 и не более 12 символов' }
+        ]}
       >
         <Input.Password />
       </Form.Item>

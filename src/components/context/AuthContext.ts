@@ -1,7 +1,10 @@
 import React from 'react'
-import { AuthContextType } from '../../types/types';
+import { AuthContextType, UserAuthType } from '../../types/types';
 
 export const AuthContext = React.createContext<AuthContextType>({
-  isAuth: false,
+  userAuth: {
+    isAuth: false,
+    isPending: true,
+  },
   setAuth() { },
 });

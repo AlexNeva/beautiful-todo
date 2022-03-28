@@ -6,6 +6,14 @@ export default interface ITodo {
   completed: boolean
 }
 
+export type TodoType = {
+  todoId: string,
+  createdAt?: string | null,
+  completed: false,
+  descr: string,
+  idx?: number,
+}
+
 export type AuthResponseType = {
   idToken: string,
   email: string,
@@ -34,7 +42,18 @@ export type CheckAuthResponseType = {
   expiresIn: string
 }
 
-export type AuthContextType = {
+export type UserAuthType = {
   isAuth: boolean,
-  setAuth: Dispatch<SetStateAction<boolean>>
+  isPending: boolean
+}
+
+export type AuthContextType = {
+  userAuth: UserAuthType,
+  setAuth: Dispatch<SetStateAction<UserAuthType>>
+}
+
+export type EditTodoType = {
+  descr: string,
+  id: string,
+  edit: Dispatch<SetStateAction<boolean>>
 }

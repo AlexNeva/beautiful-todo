@@ -1,13 +1,12 @@
-import React from 'react';
-import Message from '../../components/message/Message';
+import React, { FC } from 'react';
+
+import AddTodoForm from '../../components/todo-list/add-todo/AddTodoForm';
 import TodoList from '../../components/todo-list/TodoList';
 
-const TodosPage = () => {
+const TodosPage: FC = () => {
   return (
     <div>
-      <Message>
-        ToDo list is empty...
-      </Message>
+      <AddTodoForm />
       <TodoList />
     </div>
   )

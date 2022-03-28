@@ -1,16 +1,23 @@
-import React, { FC, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../context/AuthContext';
+import React, { FC } from 'react';
+import { getAuth, signOut } from "firebase/auth";
+import { message } from 'antd';
 
 const Signout: FC = () => {
 
-  const navigate = useNavigate();
+  type MessagesType = { [property: string]: string };
 
-  const { setAuth } = useContext(AuthContext);
+  const messages: MessagesType = {
+    error: 'Возникла ошибка. Попробуйте снова',
+    success: 'Вы успешно вышли из личного кабинета',
+  }
 
   const signout = () => {
-    setAuth(false);
-    navigate('/signin');
+    const auth = getAuth();
+    signOut(auth).then(() => {
+      message.success(messages.success);
+    }).catch(() => {
+      message.error(messages.error);
+    });
   }
 
   return (
